@@ -1,18 +1,33 @@
+\NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{articlepreamble}
 
+% Draft option
+\newif\if@loaddraft\@loaddraftfalse
+\DeclareOption{draft}{\@loaddrafttrue}
+
+\ProcessOptions\relax
+
+\if@loaddraft
+  \RequirePackage[firstpage]{draftwatermark}
+\fi
+
 % Fonts
-\usepackage{fontspec}
+\RequirePackage{fontspec}
 \defaultfontfeatures{Ligatures=TeX}
 
 % Localization
-\usepackage[english]{babel}
+\RequirePackage[english]{babel}
+
+% Text highlighting
+\RequirePackage{soul}
 
 % Nomenclature
-\usepackage{nomencl}
+\RequirePackage{nomencl}
 \makenomenclature
+\renewcommand{\nomname}{\makebox[\linewidth]{Nomenclature}}
 
 % Math
-\usepackage{amsmath,amssymb}
+\RequirePackage{amsmath,amssymb}
 
 % Missing math commands
 \providecommand{\abs}[1]{\left\lvert#1\right\rvert}                    % |.|
@@ -21,10 +36,10 @@
 \providecommand{\ddfrac}[2]{\frac{\displaystyle #1}{\displaystyle #2}} % ./.
 
 % Units
-\usepackage[Gray,squaren]{siunitx}
+\RequirePackage{siunitx}
 
 % Listings
-\usepackage{listings}
+\RequirePackage{listings}
 
 % Options for listings
 \lstset{
@@ -37,28 +52,33 @@
 }
 
 % Title formatting
-\usepackage{titling}
+\RequirePackage{titling}
 
 % Tables
-\usepackage{booktabs,multirow,array,tabularx}
+\RequirePackage{booktabs,multirow,array,tabularx}
 
 % Lists
-\usepackage{enumitem}
+\RequirePackage{enumitem}
 
 % Graphics
-\usepackage{tikz,graphicx,caption,subcaption}
+\RequirePackage{tikz,graphicx,caption,subcaption}
 
 % Geometry
-\usepackage[letterpaper, margin=1in]{geometry}
+\RequirePackage[letterpaper, margin=1in]{geometry}
 
 % Color
-\usepackage{xcolor}
+\RequirePackage{xcolor}
 \definecolor{blue-dark}{HTML}{29b6f6}
 
 % References and citations
-\usepackage[colorlinks=true,allcolors=blue-dark]{hyperref}
-\usepackage{cleveref}
-\usepackage{autonum}
+\RequirePackage[colorlinks=true,allcolors=blue-dark]{hyperref}
+\RequirePackage{cleveref}
 
 % Bibliography
-\usepackage[backend=biber,style=numeric-comp,doi=false,isbn=false,url=false,eprint=false]{biblatex}
+\RequirePackage[backend=biber,style=numeric-comp,doi=false,isbn=false,url=false,eprint=false]{biblatex}
+
+% Abstract keywords
+\providecommand{\keywords}[1]{\noindent{\textbf{Keywords:}} #1}
+
+% General commands
+\newcommand\na{---} % N/A

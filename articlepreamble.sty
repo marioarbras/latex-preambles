@@ -1,0 +1,64 @@
+\ProvidesPackage{articlepreamble}
+
+% Fonts
+\usepackage{fontspec}
+\defaultfontfeatures{Ligatures=TeX}
+
+% Localization
+\usepackage[english]{babel}
+
+% Nomenclature
+\usepackage{nomencl}
+\makenomenclature
+
+% Math
+\usepackage{amsmath,amssymb}
+
+% Missing math commands
+\providecommand{\abs}[1]{\left\lvert#1\right\rvert}                    % |.|
+\providecommand{\br}[1]{\left(#1\right)}                               % (.)
+\providecommand{\sbr}[1]{\left[#1\right]}                              % [.]
+\providecommand{\ddfrac}[2]{\frac{\displaystyle #1}{\displaystyle #2}} % ./.
+
+% Units
+\usepackage[Gray,squaren]{siunitx}
+
+% Listings
+\usepackage{listings}
+
+% Options for listings
+\lstset{
+  breaklines=true,
+  postbreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\color{red}\hookrightarrow\space}},
+  numbers=left,
+  numbersep=5pt,
+  numberstyle=\tiny\color{gray},
+  basicstyle=\footnotesize\ttfamily
+}
+
+% Title formatting
+\usepackage{titling}
+
+% Tables
+\usepackage{booktabs,multirow,array,tabularx}
+
+% Lists
+\usepackage{enumitem}
+
+% Graphics
+\usepackage{tikz,graphicx,caption,subcaption}
+
+% Geometry
+\usepackage[letterpaper, margin=1in]{geometry}
+
+% Color
+\usepackage{xcolor}
+\definecolor{blue-dark}{HTML}{29b6f6}
+
+% References and citations
+\usepackage[colorlinks=true,allcolors=blue-dark]{hyperref}
+\usepackage{cleveref}
+\usepackage{autonum}
+
+% Bibliography
+\usepackage[backend=biber,style=numeric-comp,doi=false,isbn=false,url=false,eprint=false]{biblatex}

@@ -28,6 +28,33 @@
 % \newcommand\AR{\clipbox{0pt 0pt .32em 0pt}\AE\kern-.30emR} % Aspect ratio
 \newcommand\na{---} % N/A
 
+% Missing environments
+\newenvironment{wrappedfigure}[1]
+{
+  \vspace{\baselineskip}
+  \noindent
+  \begin{minipage}{#1}
+  \captionsetup{type=figure}
+}
+{
+  \end{minipage}
+  \vspace{\baselineskip}
+  \noindent
+}
+
+\newenvironment{wrappedtable}[1]
+{
+  \vspace{\baselineskip}
+  \noindent
+  \begin{minipage}{#1}
+  \captionsetup{type=table}
+}
+{
+  \end{minipage}
+  \vspace{\baselineskip}
+  \noindent
+}
+
 % Units
 \RequirePackage{siunitx}
 
@@ -50,14 +77,20 @@
 % Tables
 \RequirePackage{booktabs,multirow,array,tabularx}
 
+% Multi-columns
+\RequirePackage{multicol}
+
+% Captions
+\RequirePackage{caption,subcaption}
+
 % Lists
 \RequirePackage{enumitem}
 
 % Graphics
-\RequirePackage{tikz,graphicx,caption,subcaption}
+\RequirePackage{tikz,graphicx}
 
 % Geometry
-\RequirePackage[letterpaper, margin=1in]{geometry}
+\RequirePackage[letterpaper, margin=0.5in]{geometry}
 
 % Color
 \RequirePackage{xcolor}

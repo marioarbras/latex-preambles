@@ -17,7 +17,7 @@
 \renewcommand{\nomname}{\makebox[\linewidth]{Nomenclature}}
 
 % Math
-\RequirePackage{amsmath,amssymb}
+\RequirePackage{amsmath,amssymb,bm,upgreek}
 
 % Missing commands
 \providecommand{\abs}[1]{\left\lvert#1\right\rvert}                    % |.|
@@ -55,6 +55,14 @@
   \noindent
 }
 
+% \renewenvironment{abstract}
+% {
+%   \small
+%   \begin{center}
+%     \bfseries \abstractname\vspace{-.5em}\vspace{0pt}
+%   \end{center}
+% }{}
+
 % Units
 \RequirePackage{siunitx}
 
@@ -73,6 +81,8 @@
 
 % Title formatting
 \RequirePackage{titling}
+\predate{}
+\postdate{}
 
 % Tables
 \RequirePackage{booktabs,multirow,array,tabularx}

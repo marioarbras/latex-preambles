@@ -20,13 +20,15 @@
 \RequirePackage{amsmath,amssymb}
 
 % Missing commands
-\providecommand{\abs}[1]{\left\lvert#1\right\rvert}                    % |.|
-\providecommand{\br}[1]{\left(#1\right)}                               % (.)
-\providecommand{\sbr}[1]{\left[#1\right]}                              % [.]
-\providecommand{\ddfrac}[2]{\frac{\displaystyle #1}{\displaystyle #2}} % ./.
+\providecommand{\abs}[1]{\left\lvert#1\right\rvert}                       % |.|
+\providecommand{\br}[1]{\left(#1\right)}                                  % (.)
+\providecommand{\sbr}[1]{\left[#1\right]}                                 % [.]
+\providecommand{\ddfrac}[2]{\frac{\displaystyle #1}{\displaystyle #2}}    % ./.
 \newcommand\AR{\text{\itshape\clipbox{0pt 0pt .32em 0pt}\AE\kern-.30emR}} % Aspect ratio
-% \newcommand\AR{\clipbox{0pt 0pt .32em 0pt}\AE\kern-.30emR} % Aspect ratio
-\newcommand\na{---} % N/A
+% \newcommand\AR{\clipbox{0pt 0pt .32em 0pt}\AE\kern-.30emR}              % Aspect ratio
+\newcommand\na{{---}}                                                     % N/A
+\newcommand*\conj[1]{{#1}^*}                                              % Conjugate
+\newcommand*\mean[1]{\bar{#1}}                                            % Mean
 
 % Units
 \RequirePackage{siunitx}

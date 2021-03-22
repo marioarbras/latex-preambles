@@ -1,62 +1,95 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{beamerpreamble}
 
-% Fonts
+%% Fonts
 \RequirePackage{fontspec}
 \defaultfontfeatures{Ligatures=TeX}
+\RequirePackage{microtype}
 
-% Localization
+%% Localization
 \RequirePackage[english]{babel}
 
-% Text highlighting
+%% Text highlighting
 \RequirePackage{soul}
 
-% Nomenclature
-\RequirePackage{nomencl}
-\makenomenclature
-\renewcommand{\nomname}{\makebox[\linewidth]{Nomenclature}}
+%% Glossaries
+\RequirePackage[acronym]{glossaries}
 
-% Math
-\RequirePackage{amsmath,amssymb}
+%% Math
+\RequirePackage{amsmath,amssymb,bm,upgreek,mathtools}
 
-% Missing commands
+%% Missing commands
 \providecommand{\abs}[1]{\left\lvert#1\right\rvert}                       % |.|
 \providecommand{\br}[1]{\left(#1\right)}                                  % (.)
 \providecommand{\sbr}[1]{\left[#1\right]}                                 % [.]
 \providecommand{\ddfrac}[2]{\frac{\displaystyle #1}{\displaystyle #2}}    % ./.
-\newcommand\AR{\text{\itshape\clipbox{0pt 0pt .32em 0pt}\AE\kern-.30emR}} % Aspect ratio
-% \newcommand\AR{\clipbox{0pt 0pt .32em 0pt}\AE\kern-.30emR}              % Aspect ratio
+\newcommand\AR{\text{\itshape\clipbox{0pt 0pt .32em 0pt}\AE\kern-.30emR}} % AR (Aspect ratio)
+% \newcommand\AR{\clipbox{0pt 0pt .32em 0pt}\AE\kern-.30emR}              % AR (Aspect ratio)
 \newcommand\na{{---}}                                                     % N/A
 \newcommand*\conj[1]{{#1}^*}                                              % Conjugate
 \newcommand*\mean[1]{\bar{#1}}                                            % Mean
 
-% Units
+%% Units
 \RequirePackage{siunitx}
 
-% Listings
+% Missing units
+\DeclareSIUnit\strain{\hspace{0em}}                          % Strain
+\NewDocumentCommand{\angsi}{omom}{\ang[#1]{#2}\,\si[#3]{#4}} % Redefined \ang with optional unit
+
+%% Listings
 \RequirePackage{listings}
 
-% Options for listings
+% C++ keywords and identifiers
 \lstset{
-  breaklines=true,
-  postbreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\color{red}\hookrightarrow\space}},
-  numbers=left,
-  numbersep=5pt,
-  numberstyle=\tiny\color{gray},
-  basicstyle=\footnotesize\ttfamily
+  language = [11]C++,
+  basicstyle = \ttfamily,
+  keywordstyle = \color{blue},
+  columns = flexible
+%   breaklines=true,
+%   postbreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\color{red}\hookrightarrow\space}},
+%   numbers=left,
+%   numbersep=5pt,
+%   numberstyle=\tiny\color{gray},
+%   basicstyle=\footnotesize\ttfamily
 }
 
-% Tables
-\RequirePackage{booktabs,multirow,array,tabularx}
+\lstset{
+  morekeywords = {[11]
+    % C++11
+    final,
+    override,
+    % C++20
+    char8_t,
+    concept,
+    co_await,
+    co_return,
+    co_yield,
+    requires
+  }
+}
 
-% Lists
+\lstset{
+  emph = {[11]
+    % C++11
+    final,
+    override,
+    % C++20
+    import,
+    module
+  }
+}
+
+%% Tables
+\RequirePackage{booktabs,multirow,multicol,array,tabularx}
+
+%% Captions
+\RequirePackage{caption,subcaption}
+
+%% Lists
 \RequirePackage{enumitem}
 
-% Graphics
-\RequirePackage{tikz,graphicx,caption,subcaption}
-
-% Color
-\RequirePackage{xcolor}
+% Color (must precede tikz to avoid conflict with different options)
+\RequirePackage[dvipsnames]{xcolor}
 \definecolor{gray}{HTML}{616161}
 \definecolor{gray-dark}{HTML}{373737}
 \definecolor{gray-light}{HTML}{fafafa}
@@ -71,20 +104,23 @@
 \definecolor{purple-dark}{HTML}{ba68c8}
 \definecolor{purple-light}{HTML}{ee98fb}
 
-% References and citations
-\hypersetup{colorlinks=true,allcolors=orange-dark}
+%% Graphics
+\RequirePackage{tikz,graphicx}
+
+%% References and citations
+\RequirePackage[colorlinks=true,allcolors=orange-dark]{hyperref}
 \RequirePackage{cleveref}
 
-% Bibliography
-\RequirePackage[backend=biber,style=numeric-comp,doi=false,isbn=false,url=false,eprint=false]{biblatex}
+%% Bibliography
+\RequirePackage[backend=biber,style=numeric,citestyle=numeric-comp,sorting=none,doi=false,isbn=false,url=false,eprint=false]{biblatex}
 
-% Theme
+%% Theme
 \usetheme[progressbar=foot,block=fill]{metropolis}
 \setbeamercolor{normal text}{fg=gray-dark, bg=gray-light}
 \setbeamercolor{alerted text}{fg=orange-dark, bg=orange-light}
 \setbeamercolor{example text}{fg=green-dark, bg=green-light}
 
-% Draft option
+%% Draft option
 \newif\if@loaddraft\@loaddraftfalse
 \DeclareOption{draft}{\@loaddrafttrue}
 \ProcessOptions\relax

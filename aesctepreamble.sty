@@ -1,5 +1,5 @@
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{elsarticlepreamble}
+\ProvidesPackage{articlepreamble}
 
 %% Fonts
 \RequirePackage{fontspec}
@@ -15,60 +15,35 @@
 %% Glossaries
 \RequirePackage[acronym]{glossaries}
 
-%% Programming facilities
-\RequirePackage{etoolbox}
+%% Title formatting
+\RequirePackage{titling}
+\predate{}
+\postdate{}
 
-%% Line numbers
-\RequirePackage[modulo]{lineno}
-\setlength\linenumbersep{5pt}
+%% Author and Affiliation
+% \usepackage{authblk}
+
+% \makeatletter
+% \def\maketitle{\AB@maketitle}
+% \makeatother
+
+% \makeatletter
+% \LetLtxMacro\@uthorfrom@uthblk\author
+
+% \RenewDocumentCommand{\author}{+o+m}{%
+%   \ifnum0=\value{authors}%
+%   \def\AB@authors{}%
+%   \fi
+%   \IfValueTF{#1}{%
+%     \@uthorfrom@uthblk[#1]{#2}%
+%   }{%
+%     \@uthorfrom@uthblk{#2}%
+%   }%
+% }
+% \makeatother
 
 %% Math
 \RequirePackage{amsmath,amssymb,bm,upgreek,mathtools}
-
-% Fixes for line numbers in math environments
-% https://tex.stackexchange.com/questions/436011/linenomath-printing-extra-numbers-on-last-line-of-multline-align-flalign-envir
-% https://tex.stackexchange.com/questions/461186/how-to-use-lineno-with-amsmath-align
-
-% Disable line numbering in measurement phase for multline
-\makeatletter
-\patchcmd{\mmeasure@}{\measuring@true}{
-  \measuring@true
-  \ifnum-\linenopenaltypar>\interdisplaylinepenalty
-    \advance\interdisplaylinepenalty-\linenopenalty
-  \fi
-  }{}{}
-\makeatother
-
-% Patch 'normal' math environments
-\newcommand*\linenomathpatch[1]{%
-  \cspreto{#1}{\linenomath}%
-  \cspreto{#1*}{\linenomath}%
-  \cspreto{end#1}{\endlinenomath}%
-  \cspreto{end#1*}{\endlinenomath}%
-}
-% Patch AMS math environments
-\newcommand*\linenomathpatchAMS[1]{%
-  \cspreto{#1}{\linenomathAMS}%
-  \cspreto{#1*}{\linenomathAMS}%
-  \csappto{end#1}{\endlinenomath}%
-  \csappto{end#1*}{\endlinenomath}%
-}
-
-% Definition of \linenomathAMS depends on whether the mathlines option is provided
-\expandafter\ifx\linenomath\linenomathWithnumbers
-  \let\linenomathAMS\linenomathWithnumbers
-  % The following line gets rid of an extra line number at the bottom
-  \patchcmd\linenomathAMS{\advance\postdisplaypenalty\linenopenalty}{}{}{}
-\else
-  \let\linenomathAMS\linenomathNonumbers
-\fi
-
-\linenomathpatch{equation}
-\linenomathpatchAMS{gather}
-\linenomathpatchAMS{multline}
-\linenomathpatchAMS{align}
-\linenomathpatchAMS{alignat}
-\linenomathpatchAMS{flalign}
 
 %% Missing commands
 \providecommand{\abs}[1]{\left\lvert#1\right\rvert}                       % |.|
@@ -126,7 +101,7 @@
 %% Listings
 \RequirePackage{listings}
 
-% C++11/20 keywords and identifiers
+% C++ keywords and identifiers
 \lstset{
   language = [11]C++,
   basicstyle = \ttfamily,
@@ -166,12 +141,8 @@
   }
 }
 
-% Multicolumn
-\RequirePackage{multicol}
-
 %% Tables
-\RequirePackage{booktabs,multirow,array,tabularx}
-\setlength{\tabcolsep}{3pt} % Table column spacing, default: 6pt
+\RequirePackage{booktabs,multirow,multicol,array,tabularx}
 
 %% Captions
 \RequirePackage{caption,subcaption}
@@ -179,9 +150,30 @@
 %% Lists
 \RequirePackage{enumitem}
 
+%% Color (must precede tikz to avoid conflict with different options)
+\RequirePackage[dvipsnames]{xcolor}
+
 %% Graphics
 \RequirePackage{tikz,graphicx}
 
+%% Geometry
+\RequirePackage[letterpaper,left=0.5in,right=0.5in,top=0.5in,bottom=1in]{geometry}
+
 %% References and citations
-\RequirePackage[colorlinks=true,allcolors=blue]{hyperref}
+\RequirePackage[colorlinks=true,allcolors=NavyBlue]{hyperref}
 \RequirePackage{cleveref}
+
+%% Bibliography
+\RequirePackage[backend=biber,style=numeric,citestyle=numeric-comp,sorting=none,doi=false,isbn=false,url=false,eprint=false]{biblatex}
+
+%% Abstract keywords
+\providecommand{\keywords}[1]{\noindent{\textbf{Keywords:}} #1}
+
+%% Draft option
+\newif\if@loaddraft\@loaddraftfalse
+\DeclareOption{draft}{\@loaddrafttrue}
+\ProcessOptions\relax
+
+\if@loaddraft
+  \RequirePackage[firstpage]{draftwatermark}
+\fi

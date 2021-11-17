@@ -152,12 +152,18 @@
 %% Lists
 \RequirePackage{enumitem}
 
-%% Color (must precede tikz to avoid conflict with different options)
+%% Color (must precede tikz and algpseudocodex to avoid conflict with different options)
 \RequirePackage[dvipsnames]{xcolor}
 
 %% Graphics
 \RequirePackage{tikz,graphicx,trimclip}
 \usetikzlibrary{arrows,chains,positioning,scopes,shapes.geometric,shapes.misc,shadows}
+
+%% Algorithms
+\RequirePackage{algorithm,algpseudocodex}
+
+%% Standalone
+\RequirePackage{standalone}
 
 %% Abstract and keywords
 \renewenvironment{abstract}{%

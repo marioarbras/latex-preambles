@@ -159,11 +159,17 @@
 %% Lists
 \RequirePackage{enumitem}
 
-%% Color (must precede tikz to avoid conflict with different options)
+%% Color (must precede tikz and algpseudocodex to avoid conflict with different options)
 \RequirePackage[dvipsnames]{xcolor}
 
 %% Graphics
 \RequirePackage{tikz,graphicx}
+
+%% Algorithms
+\RequirePackage{algorithm,algpseudocodex}
+
+%% Standalone
+\RequirePackage{standalone}
 
 %% Abstract and keywords
 \renewenvironment{abstract}{%
